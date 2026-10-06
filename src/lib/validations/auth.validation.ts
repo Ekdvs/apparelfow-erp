@@ -5,7 +5,6 @@ export const loginSchema  = z.object(
     {
         email: z
             .string()
-            .email("Please enter a valid email address")
             .max(255, "Email must be less than 255 characters")
             .regex(/^[^\s@]+@[^\s@]+\.[^\s@]+$/, "Please enter a valid email address")
             .nonempty("Email is required"),

@@ -98,6 +98,9 @@ model CuttingOrder {
   verificationItems VerificationItem[] @relation("VerificationItem_order")
   verificationLogs  VerificationLog[]
 
+  sewingStartedAt DateTime?
+  sewingStartedBy String?
+
   @@index([recipeId])
   @@index([createdBy])
   @@index([status])

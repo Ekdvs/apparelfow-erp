@@ -71,7 +71,7 @@ export const POST = async (request: NextRequest) => {
             secure: process.env.NODE_ENV === "production",
             sameSite: "lax",
             path: "/",
-            maxAge: 60 * 15,
+            maxAge: 60 * 30,
         });
 
         const userData = {
