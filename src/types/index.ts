@@ -9,13 +9,30 @@ export interface User {
   role: Role;
 }
 
-export interface OrderItem {
+export interface RecipeComponent {
+  id: string;
+  componentName: string;
+  piecesPerGarment: number;
+  imageUrl: string | null;
+}
+
+export interface Recipe {
+  id: string;
+  recipeCode: string;
+  name: string;
+  category: string;
+  stdFabricYards: number;
+  wastageCap: number;
+  components: RecipeComponent[];
+}
+
+export interface VerificationItem {
   id: string;
   componentId: string;
   expectedQty: number;
   actualQty: number | null;
   status: Light | null;
-  component: { componentName: string; imageUrl: string | null };
+  component: { componentName: string };
 }
 
 export interface VerificationLog {
@@ -36,18 +53,8 @@ export interface Order {
   status: OrderStatus;
   createdAt: string;
   recipe: { recipeCode: string; name: string; stdFabricYards: number; wastageCap: number };
-  verificationItems: OrderItem[];
-  verificationLogs: VerificationLog[];
-}
-
-export interface Recipe {
-  id: string;
-  recipeCode: string;
-  name: string;
-  category: string;
-  stdFabricYards: number;
-  wastageCap: number;
-  components: { id: string; componentName: string; piecesPerGarment: number }[];
+  verificationItems: VerificationItem[];
+  verificationLogs?: VerificationLog[];
 }
 
 export interface SewingOrder {
