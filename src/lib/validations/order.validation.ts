@@ -1,34 +1,32 @@
 
 import {z} from 'zod';
 
-export const createOrderSchema = z.object(
-    {
-        RecipeId: z
-            .string()
-            .uuid('RecipeId must be a valid UUID' ) ,
+export const createOrderSchema = z.object({
+  recipeId: z
+    .string()
+    .uuid("recipeId must be a valid UUID"),
 
-        targetQTy:z
-            .number("targetQTy must be a number")
-            .int('targetQTy must be an integer')
-            .positive('targetQTy must be a positive number')
-            .max(100000, 'targetQTy must be less than or equal to 100000'),
+  targetQty: z
+    .number("targetQty must be a number")
+    .int("targetQty must be an integer")
+    .positive("targetQty must be a positive number")
+    .max(100000, "targetQty must be less than or equal to 100000"),
 
-        fabricRollId: z
-            .string()
-            .trim()
-            .min(1, 'fabricRollId cannot be empty')
-            .max(50, 'fabricRollId must be less than or equal to 50 characters'),
+  fabricRollId: z
+    .string()
+    .trim()
+    .min(1, "fabricRollId cannot be empty")
+    .max(50, "fabricRollId must be less than or equal to 50 characters"),
 
-        actualFabricYds:z
-            .number("actualFabricYds must be a number")
-            .positive('actualFabricYds must be a positive number')
-            .max(100000, 'actualFabricYds must be less than or equal to 100000'),
-    }
-)
+  actualFabricYds: z
+    .number("actualFabricYds must be a number")
+    .positive("actualFabricYds must be a positive number")
+    .max(100000, "actualFabricYds must be less than or equal to 100000"),
+});
 
 export type CreateOrderInput = z.infer<typeof createOrderSchema>;
 
-export const countsScheme = z.object(
+export const countsSchema = z.object(
     {
         counts :z
             .array(
@@ -50,7 +48,7 @@ export const countsScheme = z.object(
     }
 )
 
-export type CountsInput = z.infer<typeof countsScheme>;
+export type CountsInput = z.infer<typeof countsSchema>;
 
 export const rejectSchema = z.object(
     {

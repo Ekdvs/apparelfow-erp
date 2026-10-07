@@ -8,7 +8,10 @@ const allowed: Record<CuttingOrderStatus, CuttingOrderStatus[]> = {
   IN_SEWING: [],
 };
 
-export const assertTransition = (from: CuttingOrderStatus, to: CuttingOrderStatus) => {
+export const assertTransition = (
+  from: CuttingOrderStatus,
+  to: CuttingOrderStatus,
+) => {
   if (!allowed[from].includes(to)) {
     throw new DomainError(`Illegal status change: ${from} → ${to}`, 409);
   }
