@@ -9,6 +9,7 @@ import { getErrorMessage } from "@/lib/axios";
 import { btnPrimary, btnSecondary, inputCls, inputErrCls } from "@/lib/ui";
 import { validatePositiveDecimal, validateWholeNumber } from "@/lib/validators";
 import { Recipe } from "@/types";
+import { LoadingButton } from "./Loader";
 
 export default function CreateOrderModal({ onClose, onCreated }: { onClose: () => void; onCreated: () => void }) {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
@@ -143,9 +144,9 @@ export default function CreateOrderModal({ onClose, onCreated }: { onClose: () =
           <button type="button" className={btnSecondary} onClick={onClose}>
             Cancel
           </button>
-          <button type="submit" className={btnPrimary} disabled={submitting}>
-            {submitting ? "Submitting…" : "Submit for verification"}
-          </button>
+          <LoadingButton type="submit" loading={submitting} loadingText="Submitting…" className={btnPrimary}>
+            Submit for verification
+          </LoadingButton>
         </div>
       </form>
     </Modal>

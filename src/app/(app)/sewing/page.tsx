@@ -8,6 +8,7 @@ import { sewingApi } from "@/lib/api";
 import { getErrorMessage } from "@/lib/axios";
 import { btnPrimary } from "@/lib/ui";
 import { SewingOrder } from "@/types";
+import { LoadingButton, SectionLoader } from "@/components/Loader";
 
 export default function SewingPage() {
   const [orders, setOrders] = useState<SewingOrder[]>([]);
@@ -65,7 +66,7 @@ export default function SewingPage() {
       </div>
 
       {loading ? (
-        <p className="text-gray-700">Loading queue…</p>
+        <SectionLoader label="Loading queue…" />
       ) : orders.length === 0 ? (
         <div className="rounded-lg border border-dashed border-gray-400 bg-white p-8 text-center text-gray-700">
           No verified batches waiting.
@@ -139,9 +140,14 @@ export default function SewingPage() {
                   </table>
                 </div>
 
-                <button className={`${btnPrimary} mt-4 w-full`} disabled={startingId === o.id} onClick={() => start(o.id)}>
-                  {startingId === o.id ? "Starting…" : "Start Sewing Assembly"}
-                </button>
+                <LoadingButton
+                  className={`${btnPrimary} mt-4 w-full`}
+                  loading={startingId === o.id}
+                  loadingText="Starting…"
+                  onClick={() => start(o.id)}
+                >
+                  Start Sewing Assembly
+                </LoadingButton>
               </article>
             );
           })}

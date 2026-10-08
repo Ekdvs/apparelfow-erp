@@ -11,6 +11,7 @@ import { getErrorMessage } from "@/lib/axios";
 import { btnPrimary, inputCls, inputErrCls } from "@/lib/ui";
 import { validatePositiveDecimal } from "@/lib/validators";
 import { Order } from "@/types";
+import { LoadingButton, SectionLoader } from "./Loader";
 
 export default function OrderDetailModal({
   id,
@@ -58,7 +59,7 @@ export default function OrderDetailModal({
   return (
     <Modal title={order ? `Order ${order.orderNo}` : "Order"} onClose={onClose} wide>
       {!order ? (
-        <p className="text-gray-700">Loading…</p>
+        <SectionLoader label="Loading order…" />
       ) : (
         <div className="space-y-5 text-sm text-gray-900">
           <div className="flex flex-wrap items-center gap-3">
@@ -118,9 +119,9 @@ export default function OrderDetailModal({
                   placeholder={`Current: ${order.actualFabricYds}`}
                 />
               </Field>
-              <button onClick={resubmit} disabled={busy} className={`${btnPrimary} mt-3`}>
-                {busy ? "Resubmitting…" : "Resubmit for verification"}
-              </button>
+              <LoadingButton onClick={resubmit} loading={busy} loadingText="Resubmitting…" className={`${btnPrimary} mt-3`}>
+                Resubmit for verification
+              </LoadingButton>
             </div>
           )}
         </div>

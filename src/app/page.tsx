@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "@/context/AuthContext";
 import { HOME } from "@/lib/roles";
+import { PageLoader } from "@/components/Loader";
 
 export default function Index() {
   const { user, loading } = useAuth();
@@ -14,5 +15,5 @@ export default function Index() {
     router.replace(user ? HOME[user.role] : "/login");
   }, [loading, user, router]);
 
-  return <p className="p-8 text-gray-700">Loading…</p>;
+  return <PageLoader label="Redirecting…" />;
 }

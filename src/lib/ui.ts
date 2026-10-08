@@ -4,7 +4,7 @@ export const inputCls =
 export const inputErrCls = "!border-red-600 focus:!ring-red-600/30";
 
 const btnBase =
-  "inline-flex items-center justify-center rounded-md px-4 py-2 text-sm font-semibold focus:outline-none focus:ring-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-700";
+  "inline-flex items-center justify-center gap-2 rounded-md px-4 py-2 text-sm font-semibold focus:outline-none focus:ring-2 disabled:cursor-not-allowed disabled:bg-gray-300 disabled:text-gray-700";
 
 export const btnPrimary = `${btnBase} bg-blue-700 text-white hover:bg-blue-800 focus:ring-blue-700/40`;
 export const btnSuccess = `${btnBase} bg-green-700 text-white hover:bg-green-800 focus:ring-green-700/40`;

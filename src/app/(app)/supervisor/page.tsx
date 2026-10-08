@@ -8,6 +8,7 @@ import RoleGate from "@/components/RoleGate";
 import { useOrders } from "@/hooks/useOrders";
 import { btnPrimary, btnSecondary, inputCls } from "@/lib/ui";
 import { OrderStatus } from "@/types";
+import { TableSkeleton } from "@/components/Loader";
 
 const STATS: { status: OrderStatus; label: string }[] = [
   { status: "PENDING_VERIFICATION", label: "Pending verification" },
@@ -65,7 +66,7 @@ export default function SupervisorPage() {
       </div>
 
       {loading ? (
-        <p className="text-gray-700">Loading orders…</p>
+         <TableSkeleton /> 
       ) : (
         <OrdersTable
           orders={shown}

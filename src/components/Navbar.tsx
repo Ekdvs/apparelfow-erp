@@ -13,7 +13,6 @@ export default function Navbar() {
 
   if (!user) return null;
 
-  
 
   const handleLogout = async () => {
     await logout();

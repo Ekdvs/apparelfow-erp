@@ -13,6 +13,7 @@ import { evaluate } from "@/lib/traffic";
 import { btnDanger, btnSecondary, btnSuccess, inputCls, inputErrCls } from "@/lib/ui";
 import { validateWholeNumber } from "@/lib/validators";
 import { Order } from "@/types";
+import { LoadingButton, SectionLoader } from "@/components/Loader";
 
 type Busy = null | "save" | "approve" | "reject";
 
@@ -123,7 +124,7 @@ export default function VerifierTerminal() {
       </Link>
 
       {loading || !order ? (
-        <p className="text-gray-700">Loading terminal…</p>
+        <SectionLoader label="Loading terminal…" />
       ) : (
         <div className="space-y-6">
           <div className="rounded-lg border border-gray-300 bg-white p-5">
@@ -195,17 +196,20 @@ export default function VerifierTerminal() {
               <div className="rounded-lg border border-gray-300 bg-white p-5">
                 <h3 className="mb-3 font-bold text-gray-900">Approve batch</h3>
                 <div className="flex flex-wrap gap-2">
-                  <button className={btnSecondary} onClick={handleSave} disabled={busy !== null}>
-                    {busy === "save" ? "Saving…" : "Save counts"}
-                  </button>
-                  <button
+                  <LoadingButton className={btnSecondary} onClick={handleSave} loading={busy === "save"} loadingText="Saving…" disabled={busy !== null}>
+                    Save counts
+                  </LoadingButton>
+
+                  <LoadingButton
                     className={btnSuccess}
                     onClick={handleApprove}
-                    disabled={!canApprove}
+                    loading={busy === "approve"}
+                    loadingText="Approving…"
+                    disabled={!canApprove && busy !== "approve"}
                     title={approveHint ?? "Approve and release to sewing"}
                   >
-                    {busy === "approve" ? "Approving…" : "Approve batch"}
-                  </button>
+                    Approve batch
+                  </LoadingButton>
                 </div>
                 {approveHint && <p className="mt-3 text-sm font-medium text-red-800">{approveHint}</p>}
               </div>
@@ -229,9 +233,9 @@ export default function VerifierTerminal() {
                     {reasonErr}
                   </p>
                 )}
-                <button className={`${btnDanger} mt-3`} onClick={handleReject} disabled={busy !== null}>
-                  {busy === "reject" ? "Rejecting…" : "Reject batch"}
-                </button>
+                <LoadingButton className={`${btnDanger} mt-3`} onClick={handleReject} loading={busy === "reject"} loadingText="Rejecting…" disabled={busy !== null}>
+                  Reject batch
+                </LoadingButton>
               </div>
             </div>
           )}

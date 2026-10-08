@@ -7,6 +7,7 @@ import RoleGate from "@/components/RoleGate";
 import { useOrders } from "@/hooks/useOrders";
 import { btnPrimary, btnSecondary, inputCls } from "@/lib/ui";
 import { OrderStatus } from "@/types";
+import { TableSkeleton } from "@/components/Loader";
 
 export default function VerifierPage() {
   const { orders, loading } = useOrders();
@@ -39,7 +40,7 @@ export default function VerifierPage() {
       </div>
 
       {loading ? (
-        <p className="text-gray-700">Loading orders…</p>
+         <TableSkeleton /> 
       ) : (
         <OrdersTable
           orders={shown}
