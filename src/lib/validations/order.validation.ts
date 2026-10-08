@@ -22,7 +22,7 @@ export const createOrderSchema = z.object({
     .number("actualFabricYds must be a number")
     .positive("actualFabricYds must be a positive number")
     .max(100000, "actualFabricYds must be less than or equal to 100000"),
-});
+}).strict();
 
 export type CreateOrderInput = z.infer<typeof createOrderSchema>;
 
@@ -46,7 +46,7 @@ export const countsSchema = z.object(
             ).min(1)
             .refine(a => new Set(a.map(c => c.componentId)).size === a.length, "Duplicate components")
     }
-)
+).strict();
 
 export type CountsInput = z.infer<typeof countsSchema>;
 
@@ -58,17 +58,21 @@ export const rejectSchema = z.object(
             .min(5, 'Rejection reason is required (min 5 characters)')
             .max(500, 'reason must be less than or equal to 500 characters'),
     }
-)
+).strict();
 
 export type RejectInput = z.infer<typeof rejectSchema>;
 
-export const resubmitSchema = z.object(
-    {
-        actualFabricYds:z
-            .number("actualFabricYds must be a number")
-            .positive('actualFabricYds must be a positive number')
-            .max(100000, 'actualFabricYds must be less than or equal to 100000'),
-    }
-)
+export const resubmitSchema = z
+  .object({
+    actualFabricYds: z
+      .number("actualFabricYds must be a number")
+      .positive("actualFabricYds must be a positive number")
+      .max(
+        100000,
+        "actualFabricYds must be less than or equal to 100000"
+      )
+      .optional(),
+  })
+  .strict();
 
 export type ResubmitInput = z.infer<typeof resubmitSchema>;
